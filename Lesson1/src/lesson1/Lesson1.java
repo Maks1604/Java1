@@ -116,7 +116,7 @@ public class Lesson1 {
         System.out.println("Привет, " + a);
     }
 
-    static void leapYear(){
+    static void leapYear() {
         System.out.print("Введите год ");
         int a = scanner.nextInt();
         if (a > 0) {
