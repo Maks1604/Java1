@@ -60,32 +60,67 @@ public class Main {
         System.out.println("Максимальное число " + max);
         System.out.println("Минимальное число " + min);
         System.out.println();
-
-        int[] arrayBalance = {2, 0, 2, 2, 4,  2};
+        // Написать метод, в который передается не пустой одномерный целочисленный массив,
+        // метод должен вернуть true, если в массиве есть место, в котором сумма левой и
+        // правой части массива равны. Примеры: checkBalance([2, 2, 2, 1, 2, 2, || 10, 1])
+        // → true, checkBalance([1, 1, 1, || 2, 1]) → true, граница показана символами ||,
+        // эти символы в массив не входят.
+        int[] arrayBalance = {2, 0, 2, 2, 4, 2};
         System.out.println(checkBalance(arrayBalance));
+        System.out.println();
+//Написать метод, которому на вход подается одномерный массив и число n
+// (может быть положительным, или отрицательным), при этом метод должен
+// сместить все элементымассива на n позиций. Для усложнения задачи нельзя
+// пользоваться вспомогательными массивами.
+        int[] arrayMove = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int countMove = -3;
+        System.out.println(Arrays.toString(arrayMove));
+        moveArrayItem(countMove, arrayMove);
+
     }
 
     static boolean checkBalance(int[] arrayBalance) {
         int sumLeft = arrayBalance[0];
         int i = 1;
         for (; i < arrayBalance.length; i++) {
-            if (sumLeft<summ(i,arrayBalance)){
-                sumLeft+=arrayBalance[i];
-            }else {
+            if (sumLeft < summ(i, arrayBalance)) {
+                sumLeft += arrayBalance[i];
+            } else {
                 break;
             }
         }
-        System.out.println(sumLeft + " ? " + summ(i,arrayBalance));
-        return sumLeft==summ(i,arrayBalance);
+        System.out.println(sumLeft + " ? " + summ(i, arrayBalance));
+        return sumLeft == summ(i, arrayBalance);
 
     }
 
-    static int summ (int i, int[] arrayBalance){
+    static int summ(int i, int[] arrayBalance) {
         int sumRight = 0;
         for (; i < arrayBalance.length; i++) {
-            sumRight+=arrayBalance[i];
+            sumRight += arrayBalance[i];
         }
         return sumRight;
     }
 
+    static void moveArrayItem(int countMove, int[] arrayMove) {
+        if (countMove > 0) {
+            for (int i = arrayMove.length; i > 0; i--) {
+                if (i > countMove) {
+                    arrayMove[i - 1] = arrayMove[i - 1 - countMove];
+                } else {
+                    arrayMove[i - 1] = 0;
+                }
+            }
+        } else if (countMove < 0) {
+            for (int i = 0; i < arrayMove.length; i++) {
+                if (i < arrayMove.length + countMove) {
+                    arrayMove[i] = arrayMove[i - countMove];
+                } else {
+                    arrayMove[i] = 0;
+                }
+            }
+
+        }
+        System.out.println(Arrays.toString(arrayMove));
+    }
 }
