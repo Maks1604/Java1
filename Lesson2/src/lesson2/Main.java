@@ -73,7 +73,7 @@ public class Main {
 // сместить все элементымассива на n позиций. Для усложнения задачи нельзя
 // пользоваться вспомогательными массивами.
         int[] arrayMove = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int countMove = -3;
+        int countMove = 3;
         System.out.println(Arrays.toString(arrayMove));
         moveArrayItem(countMove, arrayMove);
 
