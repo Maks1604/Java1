@@ -61,7 +61,7 @@ public class Main {
         System.out.println("Минимальное число " + min);
         System.out.println();
 
-        int[] arrayBalance = {2, 1, 2, 2, 2,  4};
+        int[] arrayBalance = {2, 0, 2, 2, 4,  2};
         System.out.println(checkBalance(arrayBalance));
     }
 
