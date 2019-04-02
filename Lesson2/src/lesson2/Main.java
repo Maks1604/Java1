@@ -61,18 +61,31 @@ public class Main {
         System.out.println("Минимальное число " + min);
         System.out.println();
 
-        int[] arrayBalance = {1, 1, 1, 2, 1};
-        checkBalance(arrayBalance);
+        int[] arrayBalance = {2, 1, 2, 2, 2,  4};
+        System.out.println(checkBalance(arrayBalance));
     }
 
     static boolean checkBalance(int[] arrayBalance) {
         int sumLeft = arrayBalance[0];
-        int sumRight = arrayBalance[arrayBalance.length-1];
-        for (int i = 0; i < arrayBalance.length; i++) {
-
+        int i = 1;
+        for (; i < arrayBalance.length; i++) {
+            if (sumLeft<summ(i,arrayBalance)){
+                sumLeft+=arrayBalance[i];
+            }else {
+                break;
+            }
         }
-        return true;
+        System.out.println(sumLeft + " ? " + summ(i,arrayBalance));
+        return sumLeft==summ(i,arrayBalance);
+
     }
 
-    ;
+    static int summ (int i, int[] arrayBalance){
+        int sumRight = 0;
+        for (; i < arrayBalance.length; i++) {
+            sumRight+=arrayBalance[i];
+        }
+        return sumRight;
+    }
+
 }
