@@ -40,13 +40,18 @@ public class Main {
     }
 
     static void paintGrid() {
-        System.out.println("-".repeat(size_x * 2 + 1));
+        System.out.print(" ");
         for (int i = 0; i < size_y; i++) {
+            System.out.print(" " + (i + 1));
+        }
+        System.out.println("\n" + "-".repeat(size_x * 2 + 2));
+        for (int i = 0; i < size_y; i++) {
+            System.out.print(i + 1);
             System.out.print("|");
             for (int j = 0; j < size_x; j++) {
                 System.out.print(arr[i][j] + "|");
             }
-            System.out.println("\n" + "-".repeat(size_x * 2 + 1));
+            System.out.println("\n" + "-".repeat(size_x * 2 + 2));
         }
     }
 
@@ -56,13 +61,13 @@ public class Main {
         int x = scanner.nextInt() - 1;
         System.out.print("y = ");
         int y = scanner.nextInt() - 1;
-        int[] coordinats= null;
+        int[] coordinats = null;
         if (isCellValid(x, y)) {
             arr[y][x] = cross_cell;
-            coordinats =new int[]{x, y};
+            coordinats = new int[]{x, y};
         } else {
             System.out.println("Вы не можете походить в эту клетку");
-            coordinats=movePlayer();
+            coordinats = movePlayer();
         }
         return coordinats;
     }
@@ -70,13 +75,13 @@ public class Main {
     static int[] moveAI() {
         int x = random.nextInt(size_x);
         int y = random.nextInt(size_y);
-        int[] coordinats= null;
+        int[] coordinats = null;
         if (isCellValid(x, y)) {
             arr[y][x] = zero_cell;
-            coordinats =new int[]{x, y};
+            coordinats = new int[]{x, y};
         } else {
             System.out.println("Координаты заняты уже");
-            coordinats=moveAI();
+            coordinats = moveAI();
         }
         return coordinats;
     }
@@ -145,7 +150,7 @@ public class Main {
         for (int i = y, j = x; i >= 0 && j < size_x && symbol == arr[i][j]; i--, j++) {
             count_cells++;
         }
-        for (int i = y, j = x - 1; i < size_y && j >= 0 && symbol == arr[i][j]; i++, j--) {
+        for (int i = y + 1, j = x - 1; i < size_y && j >= 0 && symbol == arr[i][j]; i++, j--) {
             count_cells++;
         }
         return count_cells >= row_lenght;
