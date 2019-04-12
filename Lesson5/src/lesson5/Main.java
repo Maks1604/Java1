@@ -6,7 +6,7 @@ public class Main {
 static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         Employee[] employeeArray =  readEmployees();
-
+WriteEmployeeForAge(employeeArray);
     }
 
     public static Employee[] readEmployees(){
@@ -19,8 +19,15 @@ static Scanner scanner = new Scanner(System.in);
         return employeeArray;
     }
 
-    public static void WriteEmployee(Employee[] employees){
-        System.out.println("Введите ");
+    public static void WriteEmployeeForAge(Employee[] employees){
+        System.out.println("Введите минимальный возраст сотрудника");
+        int age = scanner.nextInt();
+        for (Employee employee: employees ) {
+            if (employee.getAge()>=age){
+                employee.showConsole();
+            }
+            
+        }
     }
 
     public static Employee readEmployee() {
