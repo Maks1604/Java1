@@ -11,7 +11,7 @@ public class Main {
     }
 
     public static Employee[] readEmployees() {
-        System.out.println("Введите введите количество ввода сотрудников ");
+        System.out.println("Введите количество сотрудников ");
         int countEmployee = scanner.nextInt();
         Employee[] employeeArray = new Employee[countEmployee];
         for (int i = 0; i < countEmployee; i++) {
@@ -34,8 +34,9 @@ public class Main {
     public static Employee readEmployee() {
 
         Employee employee = new Employee();
-        System.out.println("Введите Фамилию Имя Отчество сотрубника");
-        employee.setFIO(scanner.next());
+        System.out.println("Введите Фамилию Имя Отчество сотрудника");
+        scanner.nextLine();
+        employee.setFIO(scanner.nextLine());
         System.out.println("Введите Должность сотрудника");
         employee.setPosition(scanner.next());
         System.out.println("Введите e-mail сотрудника");
