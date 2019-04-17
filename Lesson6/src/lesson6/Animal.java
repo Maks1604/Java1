@@ -38,13 +38,15 @@ public abstract class Animal {
         this.age = age;
     }
 
-    public boolean run(float length){
-        return length<=maxRunLength && length >=0;
+    public boolean run(float length) {
+        return length <= maxRunLength && length >= 0;
     }
-    public boolean swim(float length){
-        return length<=maxSwimLength && length >=0;
+
+    public boolean swim(float length) {
+        return length <= maxSwimLength && length >= 0;
     }
-    public boolean jump(float height){
-        return height<=maxJumpHeight && height >=0;
+
+    public boolean jump(float height) {
+        return height <= maxJumpHeight && height >= 0;
     }
 }
