@@ -12,7 +12,7 @@ public class Plate {
         if (food >= n) {
             food -= n;
             return true;
-        } else{
+        } else {
             return false;
         }
     }
@@ -29,4 +29,9 @@ public class Plate {
         System.out.println(food);
     }
 
+    public void addFood(int add) {
+        if (add>0) {
+            this.food += add;
+        }
+    }
 }
