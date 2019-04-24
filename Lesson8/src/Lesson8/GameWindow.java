@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 public class GameWindow extends JFrame {
 
     private static final int WIN_HEIGHT = 555;
@@ -24,7 +25,7 @@ public class GameWindow extends JFrame {
         JButton btnStartGame = new JButton("Start new game");
         JButton btnExit = new JButton("Exit");
 
-        JPanel bottomPanel = new JPanel(new GridLayout(1,2));
+        JPanel bottomPanel = new JPanel(new GridLayout(1, 2));
 
         bottomPanel.add(btnStartGame);
         bottomPanel.add(btnExit);

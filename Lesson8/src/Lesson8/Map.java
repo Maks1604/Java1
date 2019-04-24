@@ -6,7 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-public class Map extends JPanel{
+public class Map extends JPanel {
     private Graphics g;
     public static final int MODE_H_V_A = 0;
     public static final int MODE_H_V_H = 1;
@@ -47,15 +47,15 @@ public class Map extends JPanel{
         int cellX = e.getX() / cellWidth;
         int cellY = e.getY() / cellHeight;
 //      System.out.println("x: " + cellX + " y: " + cellY);
-       // repaint();
+        // repaint();
         g = getGraphics();
 
         if (MODE_H_V_A == mode) {
             if (!isCross) {
-                if (field[cellY][cellX]==0) {
+                if (field[cellY][cellX] == 0) {
                     g.drawLine(cellWidth * cellX + 5, cellHeight * cellY + 5, cellWidth * (cellX + 1) - 10, cellHeight * (cellY + 1) - 10);
                     g.drawLine(cellWidth * cellX + 5, cellHeight * (cellY + 1) - 10, cellWidth * (cellX + 1) - 10, cellHeight * cellY + 5);
-                    field[cellY][cellX]=cross;
+                    field[cellY][cellX] = cross;
                     isCross = !isCross;
 
                     if (checkWin(cross)) {
@@ -64,9 +64,9 @@ public class Map extends JPanel{
                         return;
                     }
                     disable();
-                    AiMove( );
+                    AiMove();
                     g.drawOval(cellWidth * moveX + 5, cellHeight * moveY + 5, cellWidth - 10, cellHeight - 10);
-                    field[moveY][moveX]=zero;
+                    field[moveY][moveX] = zero;
                     isCross = !isCross;
                     enable();
 
@@ -80,10 +80,10 @@ public class Map extends JPanel{
             }
         } else {
             if (isCross) {
-                if (field[cellY][cellX]==0) {
+                if (field[cellY][cellX] == 0) {
                     g.drawLine(cellWidth * cellX + 5, cellHeight * cellY + 5, cellWidth * (cellX + 1) - 10, cellHeight * (cellY + 1) - 10);
                     g.drawLine(cellWidth * cellX + 5, cellHeight * (cellY + 1) - 10, cellWidth * (cellX + 1) - 10, cellHeight * cellY + 5);
-                    field[cellY][cellX]=cross;
+                    field[cellY][cellX] = cross;
                     isCross = !isCross;
 
                     if (checkWin(cross)) {
@@ -93,9 +93,9 @@ public class Map extends JPanel{
                     }
                 }
             } else {
-                if (field[cellY][cellX]==0) {
+                if (field[cellY][cellX] == 0) {
                     g.drawOval(cellWidth * cellX + 5, cellHeight * cellY + 5, cellWidth - 10, cellHeight - 10);
-                    field[cellY][cellX]=zero;
+                    field[cellY][cellX] = zero;
                     isCross = !isCross;
 
                     if (checkWin(zero)) {
@@ -108,17 +108,17 @@ public class Map extends JPanel{
         }
 
         countMoves++;
-        if(countMoves==fieldSizeX*fieldSizeY) {
+        if (countMoves == fieldSizeX * fieldSizeY) {
             JOptionPane.showMessageDialog(null, "Ничья");
         }
     }
 
-    void AiMove  () {
+    void AiMove() {
         //блокировка ходов человека
-        for (int v = 0; v<fieldSizeY; v++) {
+        for (int v = 0; v < fieldSizeY; v++) {
             for (int h = 0; h < fieldSizeX; h++) {
                 //анализ наличие поля для проверки
-                if (h+winLen<=fieldSizeX) {                           //по горизонтале
+                if (h + winLen <= fieldSizeX) {                           //по горизонтале
                     if (checkLineHorisont(v, h, cross) == winLen - 1) {
                         if (MoveAiLineHorisont(v, h, zero)) return;
                     }
@@ -134,58 +134,60 @@ public class Map extends JPanel{
                         }
                     }
                 }
-                if (v+winLen<=fieldSizeY) {                       //по вертикале
-                    if (checkLineVertical(v,h,cross) ==winLen-1) {
-                        if(MoveAiLineVertical(v,h,zero)) return;
+                if (v + winLen <= fieldSizeY) {                       //по вертикале
+                    if (checkLineVertical(v, h, cross) == winLen - 1) {
+                        if (MoveAiLineVertical(v, h, zero)) return;
                     }
                 }
             }
         }
-        
-    for (int v = 0; v<fieldSizeY; v++) {
-        for (int h = 0; h < fieldSizeX; h++) {
-            //анализ наличие поля для проверки
-            if (h+winLen<=fieldSizeX) {                           //по горизонтале
-                if (checkLineHorisont(v,h,zero) == winLen-1) {
-                    if (MoveAiLineHorisont(v,h,zero)) return;
-                }
 
-                if (v-winLen>-2) {                            //вверх по диагонале
-                    if (checkDiaUp(v, h, zero) == winLen-1) {
-                        if (MoveAiDiaUp(v,h,zero)) return;
+        for (int v = 0; v < fieldSizeY; v++) {
+            for (int h = 0; h < fieldSizeX; h++) {
+                //анализ наличие поля для проверки
+                if (h + winLen <= fieldSizeX) {                           //по горизонтале
+                    if (checkLineHorisont(v, h, zero) == winLen - 1) {
+                        if (MoveAiLineHorisont(v, h, zero)) return;
                     }
-                }
-                if (v+winLen<=fieldSizeY) {                       //вниз по диагонале
-                    if (checkDiaDown(v, h, zero) == winLen-1) {
-                        if (MoveAiDiaDown(v,h,zero)) return;
-                    }
-                }
 
-            }
-            if (v+winLen<=fieldSizeY) {                       //по вертикале
-                if (checkLineVertical(v,h,zero) ==winLen-1) {
-                    if(MoveAiLineVertical(v,h,zero)) return;
+                    if (v - winLen > -2) {                            //вверх по диагонале
+                        if (checkDiaUp(v, h, zero) == winLen - 1) {
+                            if (MoveAiDiaUp(v, h, zero)) return;
+                        }
+                    }
+                    if (v + winLen <= fieldSizeY) {                       //вниз по диагонале
+                        if (checkDiaDown(v, h, zero) == winLen - 1) {
+                            if (MoveAiDiaDown(v, h, zero)) return;
+                        }
+                    }
+
+                }
+                if (v + winLen <= fieldSizeY) {                       //по вертикале
+                    if (checkLineVertical(v, h, zero) == winLen - 1) {
+                        if (MoveAiLineVertical(v, h, zero)) return;
+                    }
                 }
             }
         }
-    }
         int x, y;
         //случайный ход
         do {
             y = rnd.nextInt(fieldSizeY);
-            x  = rnd.nextInt(fieldSizeX);
-        } while (!checkMove(y,x));
+            x = rnd.nextInt(fieldSizeX);
+        } while (!checkMove(y, x));
         moveX = x;
         moveY = y;
-        field [y][x] = zero;
-}
+        field[y][x] = zero;
+    }
+
     //проверка заполнения выбранного для хода игроком
     private boolean checkMove(int y, int x) {
-        if (x<0 || x >=fieldSizeX || y<0 || y>=fieldSizeY) return false;
-        else if (!(field[y][x]==0)) return false;
+        if (x < 0 || x >= fieldSizeX || y < 0 || y >= fieldSizeY) return false;
+        else if (!(field[y][x] == 0)) return false;
 
         return true;
     }
+
     //ход компьютера по горизонтале
     private boolean MoveAiLineHorisont(int v, int h, int zero) {
         for (int j = h; j < winLen; j++) {
@@ -198,9 +200,10 @@ public class Map extends JPanel{
         }
         return false;
     }
+
     //ход компьютера по вертикале
     private boolean MoveAiLineVertical(int v, int h, int zero) {
-        for (int i = v; i<winLen; i++) {
+        for (int i = v; i < winLen; i++) {
             if ((field[i][h] == 0)) {
                 field[i][h] = zero;
                 moveX = h;
@@ -214,10 +217,10 @@ public class Map extends JPanel{
 
     private boolean MoveAiDiaUp(int v, int h, int zero) {
         for (int i = 0, j = 0; j < winLen; i--, j++) {
-            if ((field[v+i][h+j] == 0)) {
-                field[v+i][h+j] = zero;
-                moveX = h+j;
-                moveY = v+i;
+            if ((field[v + i][h + j] == 0)) {
+                field[v + i][h + j] = zero;
+                moveX = h + j;
+                moveY = v + i;
                 return true;
             }
         }
@@ -228,10 +231,10 @@ public class Map extends JPanel{
     private boolean MoveAiDiaDown(int v, int h, int zero) {
 
         for (int i = 0; i < winLen; i++) {
-            if ((field[i+v][i+h] == 0)) {
-                field[i+v][i+h] = zero;
-                moveX = i+h;
-                moveY = i+v;
+            if ((field[i + v][i + h] == 0)) {
+                field[i + v][i + h] = zero;
+                moveX = i + h;
+                moveY = i + v;
                 return true;
             }
         }
@@ -240,8 +243,8 @@ public class Map extends JPanel{
 
     //проверка победы
     private boolean checkWin(int dot) {
-        for (int v = 0; v<fieldSizeY; v++){
-            for (int h = 0; h<fieldSizeX; h++) {
+        for (int v = 0; v < fieldSizeY; v++) {
+            for (int h = 0; h < fieldSizeX; h++) {
                 //анализ наличие поля для проверки
                 if (h + winLen <= fieldSizeX) {                           //по горизонтале
                     if (checkLineHorisont(v, h, dot) >= winLen) return true;
@@ -263,37 +266,39 @@ public class Map extends JPanel{
 
     //проверка заполнения всей линии по диагонале вверх
     private int checkDiaUp(int v, int h, int zero) {
-        int count=0;
+        int count = 0;
         for (int i = 0, j = 0; j < winLen; i--, j++) {
-            if ((field[v+i][h+j] == zero)) count++;
+            if ((field[v + i][h + j] == zero)) count++;
         }
         return count;
     }
     //проверка заполнения всей линии по диагонале вниз
 
     private int checkDiaDown(int v, int h, int zero) {
-        int count=0;
+        int count = 0;
         for (int i = 0; i < winLen; i++) {
-            if ((field[i+v][i+h] == zero)) count++;
+            if ((field[i + v][i + h] == zero)) count++;
         }
         return count;
     }
 
     private int checkLineHorisont(int v, int h, int zero) {
-        int count=0;
+        int count = 0;
         for (int j = h; j < winLen + h; j++) {
             if ((field[v][j] == zero)) count++;
         }
         return count;
     }
+
     //проверка заполнения всей линии по вертикале
     private int checkLineVertical(int v, int h, int zero) {
-        int count=0;
-        for (int i = v; i< winLen + v; i++) {
+        int count = 0;
+        for (int i = v; i < winLen + v; i++) {
             if ((field[i][h] == zero)) count++;
         }
         return count;
     }
+
     void startNewGame(int mode, int fieldSizeX, int fieldSizeY, int winLen) {
         this.fieldSizeX = fieldSizeX;
         this.fieldSizeY = fieldSizeY;
@@ -301,8 +306,8 @@ public class Map extends JPanel{
         this.winLen = winLen;
         field = new int[fieldSizeY][fieldSizeX];
         isInitialized = true;
-        countMoves=0;
-        isCross=false;
+        countMoves = 0;
+        isCross = false;
         show();
         repaint();
 
@@ -310,38 +315,38 @@ public class Map extends JPanel{
     }
 
 
-
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         this.g = g;
         super.paintComponent(g);
         render(g);
 
 
     }
-    void circle (Graphics g){
+
+    void circle(Graphics g) {
 
     }
 
     void render(Graphics g) {
-        if(!isInitialized) {
+        if (!isInitialized) {
             return;
         }
 
         int panelWidth = getWidth();
         int panelHeight = getHeight();
 
-        cellHeight = panelHeight/fieldSizeX;
-        cellWidth = panelWidth/fieldSizeY;
+        cellHeight = panelHeight / fieldSizeX;
+        cellWidth = panelWidth / fieldSizeY;
 
         for (int i = 0; i < fieldSizeY; i++) {
             int y = i * cellHeight;
-            g.drawLine(0,y,panelWidth,y);
+            g.drawLine(0, y, panelWidth, y);
         }
 
         for (int i = 0; i < fieldSizeX; i++) {
             int x = i * cellWidth;
-            g.drawLine(x,0,x, panelHeight);
+            g.drawLine(x, 0, x, panelHeight);
         }
 
     }

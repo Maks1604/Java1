@@ -33,13 +33,13 @@ public class StartNewGameWindow extends JFrame {
 
         Rectangle gameWindowBounds = gameWindow.getBounds();
 
-        int posX = (int) (gameWindowBounds.getCenterX() - WIN_WIDTH/2);
-        int posY = (int) (gameWindowBounds.getCenterY() - WIN_HEIGHT/2);
+        int posX = (int) (gameWindowBounds.getCenterX() - WIN_WIDTH / 2);
+        int posY = (int) (gameWindowBounds.getCenterY() - WIN_HEIGHT / 2);
 
         setLocation(posX, posY);
         setTitle("New game parameters:");
 
-        setLayout(new GridLayout(10,1));
+        setLayout(new GridLayout(10, 1));
         addGameControlsMode();
         addGameControlsFieldWinLenght();
 
@@ -56,7 +56,7 @@ public class StartNewGameWindow extends JFrame {
 
     void btnStartGameClick() {
         int gameMode;
-        if(jrbHumVsAi.isSelected()) {
+        if (jrbHumVsAi.isSelected()) {
             gameMode = Map.MODE_H_V_A;
         } else {
             gameMode = Map.MODE_H_V_H;
@@ -68,7 +68,6 @@ public class StartNewGameWindow extends JFrame {
         setVisible(false);
 
     }
-
 
 
     void addGameControlsMode() {
